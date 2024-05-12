@@ -86,13 +86,56 @@
         <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>
         <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a>
     </nav>
-    <section id="home" style="display: block;">
-        <h2>Welcome to royal court of the Squid Lord!</h2>
-        <p>This is the home page. Click on the links above to explore.</p>
+    <section id="home" style="display: block; position: relative;">
+        <div style="display: flex; align-items: center;">
+            <div style="flex: 1;">
+                <h2>Welcome to the royal court of the Squid Lord!</h2>
+                <p>This is the home page. Click on the links above to explore.</p>
+            </div>
+            <div id="floatingImageContainer" style="flex: 1; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; position: relative;">
+                    <img id="floatingImage" src="squidpic.jpg" alt="Squid Lord" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; animation: zoomInOut 5s infinite;">
+                </div>
+            </div>
+        </div>
     </section>
+    
+    <style>
+        @keyframes zoomInOut {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+    
+    <script>
+        function getRandomPosition() {
+            var windowHeight = window.innerHeight;
+            var windowWidth = window.innerWidth;
+            var imageWidth = 200; // Width of the image
+            var imageHeight = 200; // Height of the image
+    
+            var randomX = Math.floor(Math.random() * (windowWidth - imageWidth));
+            var randomY = Math.floor(Math.random() * (windowHeight - imageHeight));
+    
+            return { x: randomX, y: randomY };
+        }
+    
+        function floatImage() {
+            var imageContainer = document.getElementById('floatingImageContainer');
+            var newPosition = getRandomPosition();
+    
+            imageContainer.style.top = newPosition.y + 'px';
+            imageContainer.style.left = newPosition.x + 'px';
+        }
+    
+        setInterval(floatImage, 3000); // Update position every 3 seconds
+    </script>
     <section id="about">
         <h2>About Me</h2>
-        <img src="https://1drv.ms/u/s!AlafcvNRoEejw0tsF0ZRaRH7M8WO?e=DoAjkE" alt="Image Description">
         <p>An angsty teen with a serious chess and computer addiction. Other than that I enjoy traveling around the world, collecting masks while doing so, and overthinking. </p>
     </section>
     <section id="travel">
@@ -158,5 +201,7 @@
         }
     </script>
 </body>
+
+</html>
 
 </html>
