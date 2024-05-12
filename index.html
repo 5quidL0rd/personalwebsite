@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squid Sanctuary</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,13 +44,22 @@
             padding: 20px;
         }
 
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
         h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
             color: #333;
             font-size: 1.5em;
             margin-bottom: 10px;
         }
 
         p {
+            font-family: 'Merriweather', serif;
             color: #666;
             line-height: 1.6;
         }
@@ -83,8 +93,6 @@
         <a href="#" onclick="showPage('travel')">Travel</a>
         <a href="#" onclick="showPage('work')">Work</a>
         <a href="#" onclick="showPage('skills')">Skills</a>
-        <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>
-        <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a>
     </nav>
     <section id="home" style="display: block; position: relative;">
         <div style="display: flex; align-items: center;">
@@ -134,10 +142,65 @@
     
         setInterval(floatImage, 3000); // Update position every 3 seconds
     </script>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>An angsty teen with a serious chess and computer addiction. Other than that I enjoy traveling around the world, collecting masks while doing so, and overthinking. </p>
-    </section>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>An angsty teen with a serious chess and computer addiction. Other than that, I enjoy traveling around the world, collecting masks while doing so, and overthinking.</p>
+    <button onclick="showLinks()">Where you can find me surfing the web</button>
+    <div id="linksContainer" style="display: none;">
+        <p>You can find me on <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a> (At least, if I let you follow me)</p>
+        <p>You can find me sharing my discerning and sophisticated music tastes on <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>.</p>
+        <p>(But don't expect me to share my playlist with just anyone.)</p>
+    </div>
+    <br>
+    <button onclick="showBooks()">Favorite books</button>
+    <ul id="booksList" style="display: none;">
+        <li>"Steve Jobs" by Walter Isaacson</li>
+        <li>"Neuromancer" by William Gibson</li>
+        <li>"The Art of Invisibility" by Kevin Mitnick</li>
+    </ul>
+    <br>
+    <button onclick="showShows()">Favorite shows</button>
+    <ul id="showsList" style="display: none;">
+        <li>Tokyo Ghoul</li>
+        <li>Chainsaw Man</li>
+        <li>3 Body Problem</li>
+    </ul>
+    <br>
+    <button onclick="showIPAddress()">My IP Address</button>
+</section>
+
+<script>
+    function showLinks() {
+        var linksContainer = document.getElementById('linksContainer');
+        if (linksContainer.style.display === 'none') {
+            linksContainer.style.display = 'block';
+        } else {
+            linksContainer.style.display = 'none';
+        }
+    }
+
+    function showBooks() {
+        var booksList = document.getElementById('booksList');
+        if (booksList.style.display === 'none') {
+            booksList.style.display = 'block';
+        } else {
+            booksList.style.display = 'none';
+        }
+    }
+
+    function showShows() {
+        var showsList = document.getElementById('showsList');
+        if (showsList.style.display === 'none') {
+            showsList.style.display = 'block';
+        } else {
+            showsList.style.display = 'none';
+        }
+    }
+
+    function showIPAddress() {
+        alert("I bet you would love to know that wouldn't you?");
+    }
+</script>
     <section id="travel">
         <h2>Travel</h2>
         <p>My wanderlust has taken me to some amazing places:</p>
@@ -161,7 +224,7 @@
         <h2>What I'm Working On</h2>
         <p>
             Currently, I'm diving deep into data analysis and visualization at IHMC.
-            Additionally, I'm exploring ethical hacking, building neural networks, and diving into website/app development.
+            Additionally, I'm exploring ethical hacking, building neural networks, and devouring info on website/app development.
             When I'm not doing that, you'll find me immersed in the world of chess.
         </p>
     </section>
@@ -186,10 +249,6 @@
     </footer>
 
     <script>
-
-
-
-
         function showPage(pageId) {
             // Hide all sections
             document.querySelectorAll('section').forEach(section => {
@@ -201,7 +260,5 @@
         }
     </script>
 </body>
-
-</html>
 
 </html>
