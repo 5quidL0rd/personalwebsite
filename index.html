@@ -142,15 +142,23 @@
     
         setInterval(floatImage, 3000); // Update position every 3 seconds
     </script>
-  <section id="about">
+<section id="about">
     <h2>About Me</h2>
-    <p>An angsty teen with a serious chess and computer addiction. Other than that, I enjoy traveling around the world, collecting masks while doing so, and overthinking.</p>
-    <button onclick="showLinks()">Where you can find me surfing the web</button>
-    <div id="linksContainer" style="display: none;">
-        <p>You can find me on <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a> (At least, if I let you follow me)</p>
-        <p>You can find me sharing my discerning and sophisticated music tastes on <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>.</p>
-        <p>(But don't expect me to share my playlist with just anyone.)</p>
+    
+    <!-- New images positioned at the top, right, and bottom -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <img src="onthebeach.jpg" alt="onthebeach" style="width: 20%; height: auto;">
+        <div style="flex: 1; margin-left: 20px;">
+            <p>An angsty teen with a serious chess and computer addiction. Other than that, I enjoy traveling around the world, collecting masks while doing so, and overthinking.</p>
+            <button onclick="showLinks()">Where you can find me surfing the web</button>
+            <div id="linksContainer" style="display: none;">
+                <p>You can find me on <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a> (At least, if I let you follow me)</p>
+                <p>You can find me sharing my discerning and sophisticated music tastes on <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>.</p>
+                <p>(But don't expect me to share my playlist with just anyone.)</p>
+            </div>
+        </div>
     </div>
+    
     <br>
     <button onclick="showBooks()">Favorite books</button>
     <ul id="booksList" style="display: none;">
@@ -167,7 +175,12 @@
     </ul>
     <br>
     <button onclick="showIPAddress()">My IP Address</button>
+
+    <!-- Image at the bottom -->
+    
 </section>
+
+
 
 <script>
     function showLinks() {
@@ -200,6 +213,11 @@
     function showIPAddress() {
         alert("I bet you would love to know that wouldn't you?");
     }
+
+    
+
+
+
 </script>
     <section id="travel">
         <h2>Travel</h2>
@@ -259,6 +277,10 @@
             document.getElementById(pageId).style.display = 'block';
         }
     </script>
+</body>
+
+</html>
+
 </body>
 
 </html>
