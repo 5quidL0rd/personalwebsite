@@ -10,7 +10,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
@@ -80,10 +79,77 @@
             text-align: center;
             padding: 10px 0;
         }
+
+        /* Styles for the main squid image */
+        #floatingImageContainer {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: zoomInOut 5s infinite;
+        }
+
+        @keyframes zoomInOut {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Loading page styles */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensure it's on top of everything */
+        }
+
+        #loading-icon {
+            width: 50px;
+            height: 50px;
+            animation: spin 2s infinite linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Loading page -->
+    <div id="loading">
+        <img id="loading-gif" src="https://media.giphy.com/media/vXAq5Lv9YdmtG/giphy.gif" alt="Loading...">
+        <p style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);">Loading...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 4000); // 10 seconds delay
+        });
+
+        // Your existing JavaScript code here
+    </script>
+
+
     <header>
         <h1>The Court of the Squid Lord</h1>
     </header>
@@ -95,52 +161,89 @@
         <a href="#" onclick="showPage('skills')">Skills</a>
     </nav>
     <section id="home" style="display: block; position: relative;">
-        <div style="display: flex; align-items: center;">
-            <div style="flex: 1;">
-                <h2>Welcome to the royal court of the Squid Lord!</h2>
-                <p>This is the home page. Click on the links above to explore.</p>
-            </div>
-            <div id="floatingImageContainer" style="flex: 1; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                <div style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; position: relative;">
-                    <img id="floatingImage" src="squidpic.jpg" alt="Squid Lord" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; animation: zoomInOut 5s infinite;">
+        <div id="main-squid-container">
+            <div style="display: flex; align-items: center;">
+                <div style="flex: 1;">
+                    <h2>Welcome to the royal court of the Squid Lord!</h2>
+                    <p>This is the home page. Click on the links above to explore.</p>
+                </div>
+                <div id="floatingImageContainer" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <img id="floatingImage" src="squidpic.jpg" alt="Squid Lord" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
                 </div>
             </div>
         </div>
     </section>
-    
-    <style>
-        @keyframes zoomInOut {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-    </style>
-    
+
     <script>
+        var isHomePage = true;
+
+        function showPage(pageId) {
+            isHomePage = pageId === 'home';
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            document.getElementById(pageId).style.display = 'block';
+        }
+
         function getRandomPosition() {
             var windowHeight = window.innerHeight;
             var windowWidth = window.innerWidth;
-            var imageWidth = 200; // Width of the image
-            var imageHeight = 200; // Height of the image
-    
-            var randomX = Math.floor(Math.random() * (windowWidth - imageWidth));
-            var randomY = Math.floor(Math.random() * (windowHeight - imageHeight));
-    
-            return { x: randomX, y: randomY };
+            var imageWidth = 50; // Width of the duplicated image
+            var imageHeight = 50; // Height of the duplicated image
+            var textElements = document.querySelectorAll('h1, h2, p, nav'); // Select text elements
+            var mainImageRect = document.getElementById('floatingImageContainer').getBoundingClientRect();
+
+            while (true) {
+                var randomX = Math.floor(Math.random() * (windowWidth - imageWidth));
+                var randomY = Math.floor(Math.random() * (windowHeight - imageHeight));
+                var overlaps = false;
+
+                // Check if the new position overlaps with any text element or main image on other pages
+                if (!isHomePage || (randomX >= mainImageRect.left && randomX <= mainImageRect.right && randomY >= mainImageRect.top && randomY <= mainImageRect.bottom)) {
+                    overlaps = true;
+                }
+
+                if (!overlaps) {
+                    return { x: randomX, y: randomY };
+                }
+            }
         }
-    
+
+        function duplicateImage() {
+  if (!isHomePage) return; // Exit the function if not on the home page
+
+  var floatingImage = document.getElementById('floatingImage');
+  var newImage = floatingImage.cloneNode(true);
+  newImage.style.width = '50px'; // Set the size of the duplicated image
+  newImage.style.height = '50px';
+
+  // Get the home section element (assuming the home section has an ID of "home")
+  var homeSection = document.getElementById('home');
+
+  // Append the new image as a child of the home section
+  homeSection.appendChild(newImage);
+
+  var newPosition = getRandomPosition();
+  newImage.style.top = newPosition.y + 'px';
+  newImage.style.left = newPosition.x + 'px';
+}
+
+        setInterval(duplicateImage, 3000); // Generate a new image every 0.1 seconds
+
         function floatImage() {
+            if (!isHomePage) return;
+
             var imageContainer = document.getElementById('floatingImageContainer');
             var newPosition = getRandomPosition();
-    
+
             imageContainer.style.top = newPosition.y + 'px';
             imageContainer.style.left = newPosition.x + 'px';
         }
-    
-        setInterval(floatImage, 3000); // Update position every 3 seconds
+
+        setInterval(floatImage, 3000); // Update position of main image every 2 seconds
     </script>
 <section id="about">
     <h2>About Me</h2>
@@ -149,12 +252,18 @@
     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
         <img src="onthebeach.jpg" alt="onthebeach" style="width: 20%; height: auto;">
         <div style="flex: 1; margin-left: 20px;">
-            <p>An angsty teen with a serious chess and computer addiction. Other than that, I enjoy traveling around the world, collecting masks while doing so, and overthinking.</p>
-            <button onclick="showLinks()">Where you can find me surfing the web</button>
+            <p>The Lord Squid often dwells in his subterranean domain, spending every waking hour working with his computer 
+                on assorted projects or diving deep into the unending battleground that is chess.
+                When he is not engaged in these activites he enjoys reading from his royal library, traveling around the world, 
+                collecting masks while doing so, and overthinking. </p>
+            <button onclick="showLinks()">Where you can find the Lord Squid surfing the web</button>
             <div id="linksContainer" style="display: none;">
-                <p>You can find me on <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a> (At least, if I let you follow me)</p>
-                <p>You can find me sharing my discerning and sophisticated music tastes on <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>.</p>
-                <p>(But don't expect me to share my playlist with just anyone.)</p>
+                <p>You can find the Lord Squid on <a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a> (At least, if he deems you worthy of following)</p>
+                <p>You can find his discerning music tastes on <a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a>.</p>
+                <p>If you would like to engage the Lord Squid on a more cerebral level, his masterpieces are visible at 
+                    <a href="https://github.com/5quidL0rd" target="_blank">Github</a>, and he is always ready for total warfare on 
+                    <a href="https://www.chess.com/home" target="_blank">Chess.com</a>.
+                </p>
             </div>
         </div>
     </div>
@@ -175,12 +284,37 @@
     </ul>
     <br>
     <button onclick="showIPAddress()">My IP Address</button>
-
-    <!-- Image at the bottom -->
     
+   
+
+
+    <!-- Contact Form -->
+    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+        <h3 style="text-align: center;">Contact Me</h3>
+        <form id="contactForm" action="https://formspree.io/f/mdoqvpkd" method="POST">
+            <div style="margin-bottom: 15px;">
+                <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Name:</label>
+                <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
+                <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="message" style="display: block; margin-bottom: 5px; font-weight: bold;">Message:</label>
+                <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+            </div>
+            
+            <button type="submit" style="display: inline-block; width: 100%; padding: 10px; background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Send</button>
+        </form>
+     
+    </div>
+    
+    <!-- Image at the bottom -->
+   
 </section>
-
-
 
 <script>
     function showLinks() {
@@ -214,11 +348,8 @@
         alert("I bet you would love to know that wouldn't you?");
     }
 
-    
-
-
-
 </script>
+
     <section id="travel">
         <h2>Travel</h2>
         <p>My wanderlust has taken me to some amazing places:</p>
@@ -245,10 +376,76 @@
         <h2>What I'm Working On</h2>
         <p>
             Currently, I'm diving deep into data analysis and visualization at IHMC.
-            Additionally, I'm exploring ethical hacking, building neural networks, and devouring info on website/app development.
-            When I'm not doing that, you'll find me immersed in the world of chess. 
+            Additionally, I'm exploring ethical hacking, building neural networks,
+            hosting my AI locally, and devouring info on website/app development.
+            When I'm not doing that, you'll find me immersed in the world of chess.
+            (And occasionally exploring digital worlds with my comrades.)
         </p>
-        <img src="lethaldancing.jpg" alt="lethaldancing" style="width: 20%; height: auto; animation: floatUpDown 5s infinite;">
+        <p>
+            Current projects with explanations:
+            
+        </p>
+        <ul>
+            <li>
+                <strong>Data Analysis and Visualization at IHMC:</strong>
+                <div id="dataAnalysisandVisualizationatIHMcExplanation">
+                    Working on analyzing complex datasets to extract meaningful insights and create visualizations that facilitate decision-making processes.
+                </div>
+            </li>
+
+            <li>
+                <strong>Building Neural Networks:</strong>
+                <div id="buildingNeuralNetworksExplanation">
+                    Experimenting with various neural network architectures and algorithms to solve complex problems and enhance AI capabilities.
+                </div>
+            </li>
+            <li>
+                <strong>Hosting AI Locally:</strong>
+                <div id="hostingAILocallyExplanation">
+                    Setting up local environments to deploy and test AI models, ensuring privacy and security of sensitive data.
+                </div>
+            </li>
+            <li>
+                <strong>Building Apps and Websites:</strong>
+                <div id="buildingAppsandWebsitesExplanation">
+                    Developing web and mobile applications, focusing on user experience and efficient functionality to meet modern demands.
+                </div>
+            </li>
+
+            <li>
+                <strong>Ethical Hacking:</strong>
+                <div id="ethicalHackingExplanation">
+                    Exploring Kali Linux capabilities and researching social engineering methodologies to better protect my cyber privacy.
+                </div>
+            </li>
+            <li>
+                <strong>Chess:</strong>
+                <div id="chessExplanation">
+                    Constantly honing my skills in chess, exploring new strategies, and participating in tournaments both online and offline.
+                </div>
+            </li>
+        </ul>
+        
+    </section>
+    
+    <style>
+        #work li strong {
+            cursor: pointer; /* Optional: change cursor to indicate hoverable content */
+        }
+    
+        #work li:hover div {
+            display: block;
+        }
+    
+        #work li div {
+            display: none;
+            position: absolute; /* position explanation div next to the bolded text */
+            background-color: white; /* adjust background color as needed */
+            padding: 5px; /* add some padding for readability */
+            border: 1px solid #ddd; /* add a border for better separation */
+            /* Adjust other styles like width and max-width as needed */
+        }
+    </style>
     </section>
     <section id="skills">
         <h2>Skills</h2>
@@ -294,13 +491,37 @@
             document.getElementById(pageId).style.display = 'block';
         }
     </script>
+
+<!--<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Hide the loading page when the content is loaded
+      document.getElementById("loading").style.display = "none";
+    });
+
+    function showPage(pageId) {
+      // Hide all sections
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Show the selected section
+      document.getElementById(pageId).style.display = 'block';
+    }
+  </script> -->
+
+
+<script>
+    // Delay hiding the loading screen for at least 1 second
+    window.onload = function () {
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+        }, 10000);
+    };
+</script>
+
+
+
 </body>
 
-</html>
-
-
-
-
-</body>
 
 </html>
