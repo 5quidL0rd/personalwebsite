@@ -559,24 +559,68 @@ newImage.style.left = newPosition.x + 'px';
 <section id="travel">
     <h2>Travel</h2>
     <p>My wanderlust has taken me to some interesting locations:</p>
+    
+    <h3>Europe</h3>
     <ul>
-        <li>Finland <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Finland.svg/1280px-Flag_of_Finland.svg.png" alt="Flag of Finland" style="width: 20px;"></li>
-        <li>Estonia <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/1280px-Flag_of_Estonia.svg.png" alt="Flag of Estonia" style="width: 20px;"></li>
-        <li>Belgium <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Belgium.svg/1280px-Flag_of_Belgium.svg.png" alt="Flag of Belgium" style="width: 20px;"></li>
-        <li>Italy <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/1280px-Flag_of_Italy.svg.png" alt="Flag of Italy" style="width: 20px;"></li>
-        <li>France <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1280px-Flag_of_France.svg.png" alt="Flag of France" style="width: 20px;"></li>
-        <li>UK <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" alt="Flag of the United Kingdom" style="width: 20px;"></li>
-    </ul>
-    <p>And back Stateside:</p>
-    <ul>
-        <li>Colorado <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Flag_of_Colorado.svg/1280px-Flag_of_Colorado.svg.png" alt="Flag of Colorado" style="width: 20px; vertical-align: middle;"></li>
-        <li>New York <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_New_York.svg/1280px-Flag_of_New_York.svg.png" alt="Flag of New York" style="width: 20px; vertical-align: middle;"></li>
-        <li>Hawaii <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Hawaii.svg/1280px-Flag_of_Hawaii.svg.png" alt="Flag of Hawaii" style="width: 20px; vertical-align: middle;"></li>
-        <li>Washington <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/1280px-Flag_of_Washington.svg.png" alt="Flag of Washington" style="width: 20px; vertical-align: middle;"></li>
+        <li class="location" data-location="Finland">Finland <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Finland.svg/1280px-Flag_of_Finland.svg.png" alt="Flag of Finland" style="width: 20px;"></li>
+        <li class="location" data-location="Estonia">Estonia <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/1280px-Flag_of_Estonia.svg.png" alt="Flag of Estonia" style="width: 20px;"></li>
+        <li class="location" data-location="Belgium">Belgium <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Belgium.svg/1280px-Flag_of_Belgium.svg.png" alt="Flag of Belgium" style="width: 20px;"></li>
+        <li class="location" data-location="Italy">Italy <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/1280px-Flag_of_Italy.svg.png" alt="Flag of Italy" style="width: 20px;"></li>
+        <li class="location" data-location="France">France <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1280px-Flag_of_France.svg.png" alt="Flag of France" style="width: 20px;"></li>
+        <li class="location" data-location="UK">UK <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" alt="Flag of the United Kingdom" style="width: 20px;"></li>
     </ul>
 
-        <p>Hopefully I'll be able to visit Japan in the near future.</p>
-    </section>
+    <div id="dropdownEurope"></div>
+    
+    <h3>Stateside</h3>
+    <ul>
+        <li class="location" data-location="Colorado">Colorado <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Flag_of_Colorado.svg/1280px-Flag_of_Colorado.svg.png" alt="Flag of Colorado" style="width: 20px; vertical-align: middle;"></li>
+        <li class="location" data-location="New York">New York <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_New_York.svg/1280px-Flag_of_New_York.svg.png" alt="Flag of New York" style="width: 20px; vertical-align: middle;"></li>
+        <li class="location" data-location="Hawaii">Hawaii <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Hawaii.svg/1280px-Flag_of_Hawaii.svg.png" alt="Flag of Hawaii" style="width: 20px; vertical-align: middle;"></li>
+        <li class="location" data-location="Washington">Washington <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/1280px-Flag_of_Washington.svg.png" alt="Flag of Washington" style="width: 20px; vertical-align: middle;"></li>
+    </ul>
+
+    <div id="dropdownStateside"></div>
+
+    <p>Hopefully I'll be able to visit Japan in the near future.</p>
+</section>
+
+<script>
+    const locations = {
+        Finland: "I actually lived in Oulu for approximately a year. Don't smile on the street they'll think you're drunk or crazy.",
+        Estonia: "Dancing every year on independence day has to be one of the greatest independence day celebrations.",
+        Belgium: "Beautiful medieval cities but even better waffles and chocolate. It really isn't a boring place.",
+        Italy: "Some of the most scenic countryside and cities of all time. Just don't argue with the taxi drivers.",
+        France: "One of my companions asked another companion how to say three in French at a bakery. The other companion told him how in Spanish. The first companion order in Spanish, and I thought he might be killed by the baker. The next day I went in, smiled, and said: buenos días, mademoiselle",
+        UK: "Being lost in the Cotswolds is a rather pleasant sort of predicament. My dream is to become a Raven Master at the Tower of London.",
+        Colorado: "Some of the greatest hiking you will ever enjoy so long as your ok with altitude sickness and regular nosebleeds.",
+        "New York": "I just want to go back and spend about a week in the MET please and thank you",
+        Hawaii: "Being a stupid tourist got entirely too close to lava days before massive eruptions rocked the island. I have absolutely nothing to do with it I swear.",
+        Washington: "The greatest natural beauty the US has to offer alongside cities filled with more drug users than I have ever seen in one location."
+    };
+
+    const dropdownEurope = document.getElementById("dropdownEurope");
+    const dropdownStateside = document.getElementById("dropdownStateside");
+
+    document.querySelectorAll(".location").forEach(item => {
+        item.addEventListener("mouseover", function() {
+            const location = this.getAttribute("data-location");
+            if (location in locations) {
+                if (["Finland", "Estonia", "Belgium", "Italy", "France", "UK"].includes(location)) {
+                    dropdownEurope.innerHTML = `<p>${locations[location]}</p>`;
+                    dropdownStateside.innerHTML = ""; // Clear stateside dropdown
+                } else {
+                    dropdownStateside.innerHTML = `<p>${locations[location]}</p>`;
+                    dropdownEurope.innerHTML = ""; // Clear Europe dropdown
+                }
+            }
+        });
+        item.addEventListener("mouseout", function() {
+            dropdownEurope.innerHTML = "";
+            dropdownStateside.innerHTML = "";
+        });
+    });
+</script>
     <section id="work">
         <h2>What I'm Working On</h2>
         <p>
@@ -697,9 +741,10 @@ newImage.style.left = newPosition.x + 'px';
                 <ul>
                     <li>Chess</li>
                     <li>Japanese</li>
-                    <li>Messing around with miscellaneous software</li>
                     <li>Calculus</li>
-                    <li>Drinking entirely too much coffee</li>
+                    <li>Messing around with miscellaneous software</li>
+                    <li>Drinking entirely too much coffee and tea (I just need to start injecting caffeine into my bloodstream)</li>
+                    <li>Overthinking social situations</li>
                     <li>Exploring virtual worlds while listening to tasteful playlists with my associate, <a href="https://marvelousmarmalade.github.io/WhorldWhideWheb/" target="_blank">Dr. Marmalade</a></li>
                 </ul>
             </div>
