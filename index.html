@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blake Fowler</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
             --bg:         #020c1b;
@@ -29,39 +29,9 @@
             overflow-x: hidden;
         }
 
-        /* images never float or animate globally */
         img { display: block; max-width: 100%; }
 
-        /* ── LOADING ─────────────────────────────── */
-        #loading {
-            position: fixed; inset: 0;
-            background: var(--bg);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease;
-        }
-        #loading.out { opacity: 0; pointer-events: none; }
-
-        .ld-squid {
-            font-size: 3.5rem;
-            animation: ldPulse 1s ease-in-out infinite;
-            margin-bottom: 1.4rem;
-        }
-        @keyframes ldPulse {
-            0%,100% { transform: scale(1) rotate(-8deg); }
-            50%      { transform: scale(1.2) rotate(8deg); }
-        }
-        .ld-bar-wrap { width: 180px; height: 2px; background: var(--navy-l); border-radius: 2px; overflow: hidden; }
-        .ld-bar { height: 100%; width: 0; background: var(--accent); animation: ldBar 1.7s ease forwards; }
-        @keyframes ldBar { to { width: 100%; } }
-        .ld-label {
-            margin-top: 1rem; color: var(--muted);
-            font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
-            opacity: 0; animation: fadeUp 0.4s ease 0.5s forwards;
-        }
-
-        /* ── HEADER / NAV ────────────────────────── */
+        /* HEADER / NAV */
         header {
             position: fixed; top: 0; width: 100%;
             padding: 0.9rem 2.5rem;
@@ -69,12 +39,7 @@
             backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(100,255,218,0.07);
             z-index: 100;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo {
-            font-weight: 700; font-size: 1.05rem;
-            color: var(--accent); letter-spacing: 0.1em;
-            text-decoration: none;
+            display: flex; align-items: center; justify-content: flex-end;
         }
         nav { display: flex; gap: 0.25rem; }
         nav a {
@@ -90,88 +55,66 @@
         nav a:hover { color: var(--accent); background: var(--accent-dim); }
         nav a.active { color: var(--accent); }
 
-        /* ── SECTIONS ────────────────────────────── */
+        /* SECTIONS */
         section {
-            padding: 6rem 12% 4rem;
+            padding: 5rem 12% 3rem;
             max-width: 1100px;
             margin: 0 auto;
         }
-        section:first-of-type { padding-top: 0; }
 
         .sec-label {
             color: var(--accent);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
         .sec-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem,3.5vw,2.6rem);
+            font-size: clamp(1.5rem,2.6vw,2rem);
+            font-weight: 600;
             color: var(--white);
             margin-bottom: 0.5rem;
         }
-        .sec-line { width: 45px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 2.5rem; }
+        .sec-line { width: 45px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 2.25rem; }
 
-        /* ── HERO ────────────────────────────────── */
+        /* HERO */
         #hero {
-            min-height: 100vh;
+            min-height: 88vh;
             display: flex; flex-direction: column; justify-content: center;
-            position: relative; overflow: hidden;
-            padding-top: 80px;
-        }
-        canvas#ink {
-            position: absolute; inset: 0;
-            pointer-events: none; opacity: 0.3;
-        }
-        .hero-hi {
-            color: var(--accent); font-size: 0.95rem;
-            letter-spacing: 0.25em; text-transform: uppercase;
-            margin-bottom: 0.8rem;
-            opacity: 0; animation: fadeUp 0.5s ease 2s forwards;
+            padding-top: 90px;
         }
         .hero-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem,7vw,6rem);
-            color: var(--white); line-height: 1.05;
-            margin-bottom: 0.5rem;
-            opacity: 0; animation: fadeUp 0.5s ease 2.15s forwards;
-        }
-        .hero-squid {
-            display: inline-block;
-            animation: sqBob 4s ease-in-out infinite;
-        }
-        @keyframes sqBob {
-            0%,100% { transform: translateY(0) rotate(-6deg); }
-            50%      { transform: translateY(-14px) rotate(6deg); }
+            font-size: clamp(2rem,4vw,2.9rem);
+            font-weight: 600;
+            color: var(--white); line-height: 1.15;
+            margin-bottom: 0.6rem;
         }
         .hero-role {
             color: var(--muted);
-            font-size: clamp(1rem,2vw,1.2rem);
-            margin-bottom: 0.5rem;
-            opacity: 0; animation: fadeUp 0.5s ease 2.3s forwards;
+            font-size: clamp(0.95rem,1.6vw,1.1rem);
+            margin-bottom: 1rem;
+            max-width: 46ch;
         }
-        .hero-research {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            color: var(--accent); font-size: 0.85rem;
-            background: var(--accent-dim);
-            border: 1px solid rgba(100,255,218,0.2);
-            border-radius: 100px; padding: 0.35rem 0.9rem;
+        .hero-role strong { color: var(--text); font-weight: 500; }
+        .hero-facts {
+            list-style: none;
             margin-bottom: 2rem;
-            opacity: 0; animation: fadeUp 0.5s ease 2.45s forwards;
         }
-        .hero-research::before { content: "🔬"; }
-        .hero-btns {
-            display: flex; gap: 0.75rem; flex-wrap: wrap;
-            opacity: 0; animation: fadeUp 0.5s ease 2.6s forwards;
+        .hero-facts li {
+            color: var(--muted);
+            font-size: 0.92rem;
+            padding: 0.22rem 0;
+            padding-left: 1.1rem;
+            position: relative;
         }
+        .hero-facts li::before {
+            content: ""; position: absolute; left: 0; top: 0.72em;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--accent); opacity: 0.6;
+        }
+        .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── BUTTONS ─────────────────────────────── */
+        /* BUTTONS */
         .btn {
             display: inline-flex; align-items: center; gap: 0.5rem;
             padding: 0.65rem 1.3rem;
@@ -179,86 +122,52 @@
             font-size: 0.82rem; font-weight: 600;
             letter-spacing: 0.06em;
             text-decoration: none; cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
             font-family: 'Inter', sans-serif;
             border: 1px solid transparent;
         }
         .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-        .btn-accent {
-            background: transparent;
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-        .btn-accent:hover {
-            background: var(--accent-dim);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(100,255,218,0.12);
-        }
-        .btn-ghost {
-            background: transparent;
-            border-color: var(--muted);
-            color: var(--muted);
-        }
-        .btn-ghost:hover {
-            border-color: var(--text); color: var(--text);
-            transform: translateY(-2px);
-        }
+        .btn-accent { background: transparent; border-color: var(--accent); color: var(--accent); }
+        .btn-accent:hover { background: var(--accent-dim); }
+        .btn-ghost { background: transparent; border-color: var(--muted); color: var(--muted); }
+        .btn-ghost:hover { border-color: var(--text); color: var(--text); }
 
-        /* ── ABOUT ───────────────────────────────── */
-        #about { padding-top: 2rem; }
+        /* ABOUT */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 4rem;
+            grid-template-columns: 1fr 260px;
+            gap: 3.5rem;
             align-items: start;
         }
         .about-text p {
             color: var(--muted);
-            font-size: 1rem;
-            margin-bottom: 1.1rem;
-            line-height: 1.85;
+            font-size: 0.97rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
         }
-        .about-text em { color: var(--text); font-style: italic; }
+        .bullets { list-style: none; margin-bottom: 1.25rem; }
+        .bullets li {
+            color: var(--muted);
+            font-size: 0.94rem;
+            line-height: 1.7;
+            padding: 0.3rem 0 0.3rem 1.15rem;
+            position: relative;
+        }
+        .bullets li::before {
+            content: ""; position: absolute; left: 0; top: 0.95em;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--accent); opacity: 0.6;
+        }
+        .bullets strong { color: var(--text); font-weight: 500; }
 
-        .profile-wrap {
-            position: sticky;
-            top: 90px;
-        }
         .profile-img {
             width: 100%;
             border-radius: 8px;
-            border: 2px solid rgba(100,255,218,0.15);
-            transition: border-color 0.3s;
+            border: 1px solid rgba(100,255,218,0.15);
         }
-        .profile-img:hover { border-color: rgba(100,255,218,0.4); }
 
-        .toggle-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0.5rem; }
-        .tbtn {
-            background: transparent;
-            border: 1px solid rgba(100,255,218,0.25);
-            color: var(--muted);
-            padding: 0.4rem 0.9rem;
-            border-radius: 3px; font-size: 0.78rem;
-            letter-spacing: 0.05em; cursor: pointer;
-            transition: all 0.2s; font-family: 'Inter', sans-serif;
-        }
-        .tbtn:hover, .tbtn.on { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-
-        .collap {
-            display: none; margin: 0.5rem 0 1rem;
-            padding: 1rem 1.2rem;
-            background: var(--navy-l); border-radius: 6px;
-            border-left: 3px solid var(--accent);
-        }
-        .collap.open { display: block; animation: fadeUp 0.3s ease; }
-        .collap ul { list-style: none; }
-        .collap li { color: var(--muted); padding: 0.3rem 0; display: flex; align-items: baseline; gap: 0.6rem; }
-        .collap li::before { content: "🦑"; flex-shrink: 0; }
-        .collap a { color: var(--accent); text-decoration: none; }
-        .collap a:hover { text-decoration: underline; }
-
-        .social-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        .social-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.25rem; }
         .chip {
             display: inline-flex; align-items: center; gap: 0.5rem;
             padding: 0.5rem 1rem;
@@ -266,52 +175,52 @@
             border: 1px solid rgba(100,255,218,0.1);
             border-radius: 4px;
             text-decoration: none; color: var(--muted); font-size: 0.82rem;
-            transition: all 0.2s;
+            transition: border-color 0.2s, color 0.2s;
         }
         .chip svg { width: 14px; height: 14px; }
         .chip:hover { border-color: var(--accent); color: var(--accent); }
-        .chip .handle { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--accent); opacity: 0.7; }
 
-        /* ── RESEARCH ────────────────────────────── */
-        .research-card {
+        /* EXPERIENCE / RESEARCH CARDS */
+        .stack { display: flex; flex-direction: column; gap: 1.1rem; }
+        .card {
             background: var(--navy-l);
-            border: 1px solid rgba(100,255,218,0.2);
-            border-radius: 10px;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1.5rem;
-            align-items: start;
-        }
-        .research-icon {
-            font-size: 2.5rem;
-            padding: 0.8rem;
-            background: var(--accent-dim);
+            border: 1px solid rgba(100,255,218,0.12);
             border-radius: 8px;
+            padding: 1.6rem 1.8rem;
         }
-        .research-card h3 {
-            color: var(--white); font-size: 1.15rem;
-            font-weight: 600; margin-bottom: 0.3rem;
+        .card h3 {
+            color: var(--white); font-size: 1.05rem;
+            font-weight: 600; margin-bottom: 0.25rem;
         }
-        .research-card .org {
-            color: var(--accent); font-size: 0.82rem;
-            letter-spacing: 0.05em; margin-bottom: 0.75rem;
+        .card .org {
+            color: var(--accent); font-size: 0.8rem;
+            letter-spacing: 0.04em; margin-bottom: 0.9rem;
         }
-        .research-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.75; }
+        .card .bullets li { padding-left: 1.15rem; }
+        .card .bullets { margin-bottom: 0; }
         .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
         .rtag {
             background: rgba(100,255,218,0.07);
             border: 1px solid rgba(100,255,218,0.2);
             color: var(--accent);
             padding: 0.2rem 0.65rem;
-            border-radius: 3px; font-size: 0.75rem;
+            border-radius: 3px; font-size: 0.74rem;
         }
+        .card-link {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            margin-top: 1.1rem;
+            color: var(--accent); font-size: 0.8rem; text-decoration: none;
+            border: 1px solid rgba(100,255,218,0.3);
+            padding: 0.35rem 0.8rem; border-radius: 3px;
+            transition: background 0.2s;
+        }
+        .card-link:hover { background: var(--accent-dim); }
 
-        /* ── PROJECTS ────────────────────────────── */
+        /* PROJECTS */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.1rem;
         }
         .proj-card {
             background: var(--navy-l);
@@ -319,25 +228,18 @@
             border-radius: 8px;
             padding: 1.5rem;
             display: flex; flex-direction: column;
-            transition: border-color 0.2s, transform 0.2s;
-            text-decoration: none;
+            transition: border-color 0.2s;
         }
-        .proj-card:hover {
-            border-color: rgba(100,255,218,0.3);
-            transform: translateY(-3px);
-        }
-        .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
-        .proj-icon { font-size: 1.4rem; }
-        .proj-link-icon { color: var(--muted); font-size: 0.85rem; }
-        .proj-card h3 { color: var(--white); font-size: 1rem; margin-bottom: 0.5rem; }
-        .proj-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; flex: 1; }
-        .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem; }
+        .proj-card:hover { border-color: rgba(100,255,218,0.3); }
+        .proj-card h3 { color: var(--white); font-size: 1rem; margin-bottom: 0.2rem; }
+        .proj-role { color: var(--muted); font-size: 0.78rem; margin-bottom: 0.8rem; }
+        .proj-card .bullets { flex: 1; margin-bottom: 0; }
+        .proj-card .bullets li { font-size: 0.875rem; }
+        .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
         .proj-tag {
             font-size: 0.72rem; color: var(--accent);
             font-family: 'Courier New', monospace;
         }
-        .proj-tag:not(:last-child)::after { content: " ·"; color: var(--muted); }
-
         .proj-links { display: flex; gap: 0.6rem; margin-top: 1.1rem; flex-wrap: wrap; }
         .proj-link {
             display: inline-flex; align-items: center; gap: 0.3rem;
@@ -346,57 +248,23 @@
             border-radius: 3px;
             color: var(--accent); font-size: 0.78rem;
             text-decoration: none; letter-spacing: 0.04em;
-            transition: background 0.2s, border-color 0.2s;
+            transition: background 0.2s;
         }
-        .proj-link:hover { background: var(--accent-dim); border-color: var(--accent); }
+        .proj-link:hover { background: var(--accent-dim); }
+        .proj-card video { width: 100%; border-radius: 6px; margin-top: 1rem; max-height: 200px; background: #000; }
 
-        .gh-cta {
+        .cta {
             margin-top: 1.5rem;
-            padding: 1.25rem 1.5rem;
+            padding: 1.15rem 1.5rem;
             background: var(--navy-l);
             border-radius: 8px;
             border-left: 3px solid var(--accent);
             display: flex; align-items: center; justify-content: space-between;
             flex-wrap: wrap; gap: 1rem;
         }
-        .gh-cta p { color: var(--muted); font-size: 0.9rem; }
+        .cta p { color: var(--muted); font-size: 0.9rem; }
 
-        /* ── TRAVEL ──────────────────────────────── */
-        .travel-desc {
-            padding: 1.1rem 1.4rem;
-            background: var(--navy);
-            border: 1px solid rgba(100,255,218,0.12);
-            border-radius: 8px;
-            color: var(--muted); font-style: italic; font-size: 0.92rem;
-            min-height: 64px; line-height: 1.75;
-            margin-bottom: 2rem;
-            transition: opacity 0.25s;
-        }
-        .travel-regions {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1.25rem;
-        }
-        .travel-region {
-            background: var(--navy-l);
-            border: 1px solid rgba(100,255,218,0.07);
-            border-radius: 8px; padding: 1.4rem;
-        }
-        .travel-region h3 {
-            color: var(--accent); font-size: 0.72rem;
-            letter-spacing: 0.22em; text-transform: uppercase;
-            margin-bottom: 0.9rem;
-        }
-        .loc {
-            display: flex; align-items: center; gap: 0.7rem;
-            padding: 0.45rem 0.5rem; border-radius: 4px;
-            cursor: default; transition: background 0.2s;
-            color: var(--text); font-size: 0.9rem;
-        }
-        .loc:hover { background: rgba(100,255,218,0.05); }
-        .loc img { width: 22px; height: auto; border-radius: 2px; flex-shrink: 0; }
-
-        /* ── SKILLS ──────────────────────────────── */
+        /* SKILLS */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -413,229 +281,165 @@
             border: 1px solid rgba(100,255,218,0.13);
             color: var(--muted);
             padding: 0.28rem 0.65rem; border-radius: 3px; font-size: 0.8rem;
-            transition: all 0.2s; cursor: default;
         }
-        .tag:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* ── CONTACT ─────────────────────────────── */
-        .contact-grid {
-            display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start;
-        }
-        .contact-intro p { color: var(--muted); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1rem; }
-        .contact-intro a { color: var(--accent); text-decoration: none; }
-        .contact-intro a:hover { text-decoration: underline; }
-        .code-block {
-            margin-top: 1.5rem; padding: 1rem 1.2rem;
-            background: var(--navy-l); border-radius: 6px;
-            font-family: 'Courier New', monospace; font-size: 0.78rem;
-            color: var(--muted); line-height: 1.9;
-            border: 1px solid rgba(100,255,218,0.07);
-        }
-        .c-g { color: #6a9955; } .c-b { color: #569cd6; } .c-s { color: var(--accent); }
-
-        form { display: flex; flex-direction: column; gap: 1rem; }
-        form label { display: block; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
-        form input, form textarea {
-            width: 100%; padding: 0.7rem 1rem;
-            background: var(--navy-l);
-            border: 1px solid rgba(100,255,218,0.13);
-            border-radius: 4px; color: var(--text);
-            font-family: 'Inter', sans-serif; font-size: 0.92rem;
-            transition: border-color 0.2s;
-        }
-        form input:focus, form textarea:focus { outline: none; border-color: var(--accent); }
-        form textarea { resize: vertical; min-height: 120px; }
-
-        /* ── FOOTER ──────────────────────────────── */
+        /* FOOTER */
         footer {
             text-align: center; padding: 2.5rem;
             color: var(--muted); font-size: 0.8rem;
             border-top: 1px solid rgba(100,255,218,0.06);
-            margin-top: 4rem;
+            margin-top: 3rem;
         }
-        footer .squid { font-family: 'Courier New', monospace; color: rgba(100,255,218,0.35); font-size: 0.72rem; margin-top: 0.4rem; }
 
-        /* ── RESPONSIVE ──────────────────────────── */
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-            section { padding: 5rem 6% 3rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .profile-wrap { position: static; display: flex; gap: 1rem; }
-            .profile-img { width: 50%; }
-            .contact-grid { grid-template-columns: 1fr; }
-            header { padding: 0.9rem 1.2rem; }
+            section { padding: 4.5rem 6% 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .profile-img { max-width: 260px; }
+            header { padding: 0.9rem 1.2rem; justify-content: center; }
         }
         @media (max-width: 600px) {
-            nav a { font-size: 0.7rem; padding: 0.35rem 0.5rem; }
-            .research-card { grid-template-columns: 1fr; }
-            .profile-wrap { flex-direction: column; }
-            .profile-img { width: 100%; }
+            nav a { font-size: 0.7rem; padding: 0.35rem 0.45rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- LOADING -->
-<div id="loading">
-    <div class="ld-squid">🦑</div>
-    <div class="ld-bar-wrap"><div class="ld-bar"></div></div>
-    <p class="ld-label">Blake Fowler</p>
-</div>
-
-<!-- HEADER -->
 <header>
-    <a href="#hero" class="logo">BF</a>
     <nav>
         <a href="#hero">Home</a>
         <a href="#about">About</a>
-        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
-        <a href="#travel">Travel</a>
         <a href="#skills">Skills</a>
     </nav>
 </header>
 
-<!-- HERO -->
 <section id="hero">
-    <canvas id="ink"></canvas>
-    <p class="hero-hi">Hello, I'm</p>
-    <h1 class="hero-name">Blake Fowler <span class="hero-squid">🦑</span></h1>
-    <p class="hero-role">CS Student &nbsp;·&nbsp; Researcher &nbsp;·&nbsp; Chess Player &nbsp;·&nbsp; Traveler</p>
-    <span class="hero-research">UF Research — Vision Language Action Models</span>
+    <h1 class="hero-name">Blake Fowler</h1>
+    <p class="hero-role">Computer science student at the University of Florida. I work on machine learning research and build software that ships.</p>
+    <ul class="hero-facts">
+        <li>Undergraduate researcher on vision language action models, Dr. Sumit Jha's group</li>
+        <li>Former research intern at the Institute for Human and Machine Cognition</li>
+        <li>Studied abroad at Kyoto University, summer 2026</li>
+    </ul>
     <div class="hero-btns">
-        <a href="https://www.linkedin.com/in/blake-fowler-3646aa275/" target="_blank" class="btn btn-accent">
-            <!-- LinkedIn icon -->
+        <a href="https://www.linkedin.com/in/blake-fowler-3646aa275/" target="_blank" rel="noopener" class="btn btn-accent">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
         </a>
-        <a href="https://github.com/5quidL0rd" target="_blank" class="btn btn-ghost">
-            <!-- GitHub icon -->
+        <a href="https://github.com/5quidL0rd" target="_blank" rel="noopener" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
         </a>
-        <a href="#about" class="btn btn-ghost">Learn More</a>
+        <a href="#projects" class="btn btn-ghost">Projects</a>
     </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
     <p class="sec-label">Who I Am</p>
-    <h2 class="sec-title">About Me</h2>
+    <h2 class="sec-title">About</h2>
     <div class="sec-line"></div>
 
     <div class="about-grid">
         <div class="about-text">
-            <p>
-                CS student at the University of Florida, researching Vision Language Action models with Dr. Sumit Jha.
-                I spend the rest of my time playing chess, grinding LeetCode, traveling the world, and working on personal projects.
-            </p>
-
-            <div class="toggle-row">
-                <button class="tbtn" onclick="tog('books',this)">Favorite Books</button>
-                <button class="tbtn" onclick="tog('shows',this)">Favorite Shows</button>
-                <button class="tbtn" onclick="tog('findme',this)">Find Me Online</button>
-            </div>
-
-            <div class="collap" id="books">
-                <ul>
-                    <li>"Steve Jobs" — Walter Isaacson</li>
-                    <li>"Chip War" — Chris Miller</li>
-                    <li>"Welcome to the Monkey House" — Kurt Vonnegut</li>
-                    <li><a href="readinglist.html" target="_blank">Full reading list →</a></li>
-                </ul>
-            </div>
-            <div class="collap" id="shows">
-                <ul>
-                    <li>Tokyo Ghoul</li>
-                    <li>Chainsaw Man</li>
-                    <li>3 Body Problem</li>
-                </ul>
-            </div>
-            <div class="collap" id="findme">
-                <ul>
-                    <li><a href="https://www.instagram.com/blake.o.fowler/" target="_blank">Instagram</a> — if I deem you worthy</li>
-                    <li><a href="https://open.spotify.com/user/31uqv62hgbcgscet6oz6tphxzvue" target="_blank">Spotify</a> — discerning tastes</li>
-                    <li><a href="https://www.chess.com/home" target="_blank">Chess.com</a> — ready for total warfare</li>
-                </ul>
-            </div>
+            <p>I study computer science at the University of Florida. Most of my work sits where machine learning meets systems that people actually use, and most of what I have learned came from shipping things and finding out where they broke.</p>
+            <ul class="bullets">
+                <li><strong>Research.</strong> Vision language action models at UF. Previously benchmarked visual reasoning in large language models at IHMC.</li>
+                <li><strong>Building.</strong> Rust, Python, and C++ projects, from a cross platform travel app to a local LLM environment.</li>
+                <li><strong>Abroad.</strong> A summer at Kyoto University studying performant programming, culturally aware design, and Japanese.</li>
+            </ul>
 
             <div class="social-row">
-                <a href="https://www.linkedin.com/in/blake-fowler-3646aa275/" target="_blank" class="chip">
+                <a href="https://www.linkedin.com/in/blake-fowler-3646aa275/" target="_blank" rel="noopener" class="chip">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    <span>LinkedIn</span><span class="handle">blake-fowler</span>
+                    <span>LinkedIn</span>
                 </a>
-                <a href="https://github.com/5quidL0rd" target="_blank" class="chip">
+                <a href="https://github.com/5quidL0rd" target="_blank" rel="noopener" class="chip">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                    <span>GitHub</span><span class="handle">5quidL0rd</span>
+                    <span>GitHub</span>
                 </a>
             </div>
         </div>
 
-        <div class="profile-wrap">
+        <div>
             <img src="chessboard.jpg" alt="Blake Fowler" class="profile-img">
         </div>
     </div>
 </section>
 
-<!-- RESEARCH -->
-<section id="research">
-    <p class="sec-label">Academic Work</p>
-    <h2 class="sec-title">Research</h2>
+<section id="experience">
+    <p class="sec-label">Research and Work</p>
+    <h2 class="sec-title">Experience</h2>
     <div class="sec-line"></div>
 
-    <div style="display:flex;flex-direction:column;gap:1.25rem;">
-        <div class="research-card">
-            <div class="research-icon">🤖</div>
-            <div>
-                <h3>Vision Language Action Models</h3>
-                <p class="org">University of Florida &nbsp;·&nbsp; Dr. Sumit Jha's Research Group &nbsp;·&nbsp; Present</p>
-                <p>
-                    Working on VLA model research — systems that combine visual perception,
-                    natural language understanding, and physical action to enable agents to reason about
-                    and interact with the real world. Bridging the gap between what AI can see and say
-                    and what it can actually do.
-                </p>
-                <div class="tag-row">
-                    <span class="rtag">VLA Models</span>
-                    <span class="rtag">Computer Vision</span>
-                    <span class="rtag">NLP</span>
-                    <span class="rtag">Robotics</span>
-                    <span class="rtag">Deep Learning</span>
-                    <span class="rtag">Python</span>
-                </div>
+    <div class="stack">
+        <div class="card">
+            <h3>Undergraduate Researcher, Vision Language Action Models</h3>
+            <p class="org">University of Florida, Dr. Sumit Jha's research group, present</p>
+            <ul class="bullets">
+                <li>Research on models that combine visual perception, language understanding, and physical action.</li>
+                <li>Focus on how well these systems reason about the world before acting in it.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="rtag">VLA Models</span>
+                <span class="rtag">Computer Vision</span>
+                <span class="rtag">Deep Learning</span>
+                <span class="rtag">Python</span>
             </div>
         </div>
 
-        <div class="research-card">
-            <div class="research-icon">🎓</div>
-            <div>
-                <h3>Trustworthy AI Academic Advisor</h3>
-                <p class="org">University of West Florida &nbsp;·&nbsp; Published at ACM UIST 2024</p>
-                <p>
-                    Co-authored research on a trustworthy AI-powered academic advising system designed for 24/7
-                    student support — augmenting human advisors rather than replacing them. The work focused on
-                    reliability, transparency, and safe deployment of LLMs in high-stakes advising contexts.
-                </p>
-                <div class="tag-row">
-                    <span class="rtag">LLMs</span>
-                    <span class="rtag">AI Safety</span>
-                    <span class="rtag">HCI</span>
-                    <span class="rtag">Published</span>
-                </div>
-                <a href="https://dl.acm.org/doi/10.1145/3696673.3723065" target="_blank"
-                   style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:1rem;
-                          color:var(--accent);font-size:0.82rem;text-decoration:none;
-                          border:1px solid rgba(100,255,218,0.3);padding:0.35rem 0.8rem;border-radius:3px;
-                          transition:background 0.2s;"
-                   onmouseover="this.style.background='rgba(100,255,218,0.08)'"
-                   onmouseout="this.style.background='transparent'">
-                    View on ACM Digital Library ↗
-                </a>
+        <div class="card">
+            <h3>Student Researcher and Programmer</h3>
+            <p class="org">Institute for Human and Machine Cognition, Human Resilience and Performance, June to August 2025</p>
+            <ul class="bullets">
+                <li>Implemented VISTa, a visual diagnostic tool, to benchmark five large language models across seven low level visual categories.</li>
+                <li>Designed the test protocol and built a grading scale for a visual reasoning task originally written for human subjects.</li>
+                <li>Found that state of the art vision models fail on basics: identifying shapes, counting them, and judging orientation.</li>
+                <li>Contributed literature reviews on transcranial alternating current stimulation devices to inform ongoing studies.</li>
+                <li>Presented results and recommended next steps to senior IHMC researchers.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="rtag">LLM Benchmarking</span>
+                <span class="rtag">Vision Models</span>
+                <span class="rtag">Data Analysis</span>
+                <span class="rtag">Neuroscience</span>
             </div>
+        </div>
+
+        <div class="card">
+            <h3>Study Abroad, Cross Cultural Engineering and Design</h3>
+            <p class="org">Kyoto University, UF in Japan, May to August 2026</p>
+            <ul class="bullets">
+                <li>Summer program directed by Dr. Jeremiah Blanchard, taken alongside Kyoto University students.</li>
+                <li>Coursework in Performant Programming, Intro to Culturally Aware Design, and Intermediate Japanese.</li>
+                <li>Pitched and led GeoConnect as the term project with a team of three.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="rtag">Rust</span>
+                <span class="rtag">Team Lead</span>
+                <span class="rtag">Japanese</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Trustworthy AI Academic Advisor</h3>
+            <p class="org">University of West Florida, published at ACM UIST 2024</p>
+            <ul class="bullets">
+                <li>Co-authored work on an AI advising system built to support students continuously rather than replace human advisors.</li>
+                <li>Focused on reliability, transparency, and safe deployment of LLMs in high stakes advising.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="rtag">LLMs</span>
+                <span class="rtag">AI Safety</span>
+                <span class="rtag">HCI</span>
+                <span class="rtag">Published</span>
+            </div>
+            <a href="https://dl.acm.org/doi/10.1145/3696673.3723065" target="_blank" rel="noopener" class="card-link">View on ACM Digital Library</a>
         </div>
     </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
     <p class="sec-label">What I Build</p>
     <h2 class="sec-title">Projects</h2>
@@ -643,30 +447,51 @@
 
     <div class="projects-grid">
         <div class="proj-card">
-            <div class="proj-top">
-                <span class="proj-icon">🎯</span>
+            <h3>GeoConnect</h3>
+            <p class="proj-role">Pitched and led, team of three</p>
+            <ul class="bullets">
+                <li>Explains the reasoning behind Japanese regional customs and compares them to US practice across the country's eight regions.</li>
+                <li>Rust and Dioxus, backed by PostgreSQL, with content compiled into the binary as a JSON snapshot so there are no runtime credentials.</li>
+                <li>Shipped on web, Android, and Windows, with shareable routes to any region or place.</li>
+            </ul>
+            <div class="proj-tags">
+                <span class="proj-tag">Rust</span>
+                <span class="proj-tag">Dioxus</span>
+                <span class="proj-tag">PostgreSQL</span>
+                <span class="proj-tag">WASM</span>
             </div>
+            <div class="proj-links">
+                <a href="https://5quidl0rd.github.io/GeoConnect/" target="_blank" rel="noopener" class="proj-link">Live Site</a>
+                <a href="https://github.com/5quidL0rd/GeoConnect" target="_blank" rel="noopener" class="proj-link">GitHub</a>
+            </div>
+        </div>
+
+        <div class="proj-card">
             <h3>FocusMind</h3>
-            <p>AI-powered study coach built at GatorHacks. Combines the Pomodoro technique with real-time webcam focus tracking (MediaPipe), David Goggins-style AI motivation, and OpenAI TTS voice coaching. Threshold-based interventions kick in when attention drops.</p>
+            <p class="proj-role">Built at GatorHacks</p>
+            <ul class="bullets">
+                <li>Study coach that pairs a Pomodoro timer with real time webcam focus tracking through MediaPipe.</li>
+                <li>Threshold based interventions trigger voice coaching when attention drops.</li>
+            </ul>
             <div class="proj-tags">
                 <span class="proj-tag">Python</span>
                 <span class="proj-tag">FastAPI</span>
                 <span class="proj-tag">React</span>
-                <span class="proj-tag">OpenAI</span>
                 <span class="proj-tag">MediaPipe</span>
             </div>
             <div class="proj-links">
-                <a href="https://github.com/5quidL0rd/FocusMind" target="_blank" class="proj-link">GitHub ↗</a>
-                <a href="https://www.hackathonparty.com/hackathons/26/projects/329" target="_blank" class="proj-link">GatorHacks Demo ↗</a>
+                <a href="https://github.com/5quidL0rd/FocusMind" target="_blank" rel="noopener" class="proj-link">GitHub</a>
+                <a href="https://www.hackathonparty.com/hackathons/26/projects/329" target="_blank" rel="noopener" class="proj-link">Demo</a>
             </div>
         </div>
 
-        <div class="proj-card" style="cursor:default;">
-            <div class="proj-top">
-                <span class="proj-icon">🧠</span>
-            </div>
+        <div class="proj-card">
             <h3>Local LLM Research Environment</h3>
-            <p>Self-hosted AI research setup using Ollama to run large language models entirely locally. Built tooling around it for querying, experimenting with prompts, and testing model behavior — no API costs, full control, runs offline.</p>
+            <p class="proj-role">Personal project</p>
+            <ul class="bullets">
+                <li>Self hosted setup running large language models locally with Ollama.</li>
+                <li>Tooling for querying models, testing prompts, and comparing behavior offline with no API cost.</li>
+            </ul>
             <div class="proj-tags">
                 <span class="proj-tag">Python</span>
                 <span class="proj-tag">Ollama</span>
@@ -674,49 +499,33 @@
             </div>
         </div>
 
-        <div class="proj-card" style="cursor:default;">
-            <div class="proj-top">
-                <span class="proj-icon">📊</span>
-            </div>
+        <div class="proj-card">
             <h3>Reddit Political Opinion Visualizer</h3>
-            <p>Built at IHMC — a data visualization showing how political opinions on Reddit shift over time. Scraped and analyzed post/comment data to surface trends in public sentiment across political subreddits.</p>
+            <p class="proj-role">Built at IHMC</p>
+            <ul class="bullets">
+                <li>Scraped and analyzed post and comment data across political subreddits.</li>
+                <li>Visualized how sentiment on a given topic shifts over time.</li>
+            </ul>
             <div class="proj-tags">
                 <span class="proj-tag">Python</span>
-                <span class="proj-tag">Data Viz</span>
                 <span class="proj-tag">Reddit API</span>
-                <span class="proj-tag">IHMC</span>
+                <span class="proj-tag">Data Viz</span>
             </div>
-            <div style="margin-top:1rem;">
-                <video controls style="width:100%;border-radius:6px;margin-top:0.5rem;max-height:200px;background:#000;"
-                       onclick="event.stopPropagation()">
-                    <source src="ihmc-reddit.mp4" type="video/mp4">
-                </video>
-            </div>
+            <video controls preload="metadata">
+                <source src="ihmc-reddit.mp4" type="video/mp4">
+            </video>
         </div>
     </div>
 
-    <div class="gh-cta">
-        <p>More on GitHub — including experiments I haven't written up yet.</p>
-        <a href="https://github.com/5quidL0rd" target="_blank" class="btn btn-accent">
+    <div class="cta">
+        <p>More on GitHub, including work I have not written up yet.</p>
+        <a href="https://github.com/5quidL0rd" target="_blank" rel="noopener" class="btn btn-accent">
             <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            View All on GitHub →
+            View All on GitHub
         </a>
     </div>
 </section>
 
-<!-- TRAVEL -->
-<section id="travel">
-    <p class="sec-label">Wanderlust</p>
-    <h2 class="sec-title">Travel</h2>
-    <div class="sec-line"></div>
-    <p style="color:var(--muted);margin-bottom:1.5rem;font-size:0.9rem;">Hover a highlighted country for my honest take on it.</p>
-
-    <div class="travel-desc" id="tdesc">Hover a highlighted country on the map.</div>
-
-    <div id="mapdiv" style="width:100%;height:480px;border-radius:10px;overflow:hidden;background:var(--navy-l);"></div>
-</section>
-
-<!-- SKILLS -->
 <section id="skills">
     <p class="sec-label">What I Know</p>
     <h2 class="sec-title">Skills</h2>
@@ -727,18 +536,17 @@
             <h3>Languages</h3>
             <div class="tags">
                 <span class="tag">Python</span>
-                <span class="tag">Java</span>
                 <span class="tag">C++</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">HTML / CSS</span>
+                <span class="tag">Rust</span>
             </div>
         </div>
         <div class="skill-group">
-            <h3>Tools & Platforms</h3>
+            <h3>Tools and Platforms</h3>
             <div class="tags">
-                <span class="tag">Git / GitHub</span>
-                <span class="tag">Ollama</span>
+                <span class="tag">Git and GitHub</span>
                 <span class="tag">PyTorch</span>
+                <span class="tag">Ollama</span>
+                <span class="tag">PostgreSQL</span>
                 <span class="tag">Linux</span>
             </div>
         </div>
@@ -747,47 +555,34 @@
             <div class="tags">
                 <span class="tag">Machine Learning</span>
                 <span class="tag">VLA Models</span>
+                <span class="tag">LLM Evaluation</span>
                 <span class="tag">Data Analysis</span>
-                <span class="tag">LLMs</span>
             </div>
         </div>
         <div class="skill-group">
             <h3>Other</h3>
             <div class="tags">
-                <span class="tag">Chess ♟</span>
-                <span class="tag">Japanese 🇯🇵</span>
-                <span class="tag">Mask collecting</span>
-                <span class="tag">Too much coffee ☕</span>
+                <span class="tag">Chess</span>
+                <span class="tag">Japanese</span>
             </div>
         </div>
     </div>
 
-    <div class="gh-cta" style="margin-top:2.5rem">
-        <p>For internships, experience, and full work history.</p>
-        <a href="https://www.linkedin.com/in/blake-fowler-3646aa275/" target="_blank" class="btn btn-accent">
+    <div class="cta" style="margin-top:2.5rem">
+        <p>Full work history and internships are on LinkedIn.</p>
+        <a href="https://www.linkedin.com/in/blake-fowler-3646aa275/" target="_blank" rel="noopener" class="btn btn-accent">
             <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            View LinkedIn →
+            View LinkedIn
         </a>
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-    <p>Designed &amp; Built by Blake Fowler &copy; 2025</p>
-    <p class="squid">// 🦑 5quidL0rd on the internet</p>
+    <p>Blake Fowler, 2026</p>
 </footer>
 
 <script>
-    /* Loading screen */
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const l = document.getElementById('loading');
-            l.classList.add('out');
-            setTimeout(() => l.style.display = 'none', 700);
-        }, 1900);
-    });
-
-    /* Active nav highlight via IntersectionObserver */
+    /* Active nav highlight */
     const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('section[id]');
 
@@ -795,166 +590,13 @@
         entries.forEach(e => {
             if (e.isIntersecting) {
                 navLinks.forEach(a => a.classList.remove('active'));
-                const active = document.querySelector(`nav a[href="#${e.target.id}"]`);
+                const active = document.querySelector('nav a[href="#' + e.target.id + '"]');
                 if (active) active.classList.add('active');
             }
         });
     }, { threshold: 0.3 });
 
     sections.forEach(s => obs.observe(s));
-
-    /* Collapsible toggles */
-    function tog(id, btn) {
-        const el = document.getElementById(id);
-        const open = el.classList.toggle('open');
-        btn.classList.toggle('on', open);
-    }
-
-    /* Travel map descriptions */
-    const travelDesc = {
-        "FI": { name: "Finland",        text: "I actually lived in Oulu for about a year. Don't smile on the street — they'll think you're drunk or crazy." },
-        "EE": { name: "Estonia",        text: "Dancing every year on independence day has to be one of the greatest independence day celebrations." },
-        "BE": { name: "Belgium",        text: "Beautiful medieval cities but even better waffles and chocolate. It really isn't a boring place." },
-        "IT": { name: "Italy",          text: "Some of the most scenic countryside and cities of all time. Just don't argue with the taxi drivers." },
-        "FR": { name: "France",         text: "One of my companions asked how to say 'three' in French at a bakery. His friend told him in Spanish. He ordered in Spanish. I genuinely thought the baker might kill him. The next day I walked in, smiled, and said: buenos días, mademoiselle." },
-        "GB": { name: "United Kingdom", text: "Being lost in the Cotswolds is a rather pleasant sort of predicament. My dream is to become a Raven Master at the Tower of London." },
-        "JP": { name: "Japan",          text: "Japan exceeded every expectation I had, which were already unreasonably high. The food, the trains, the temples — and somehow the convenience stores are still the highlight." },
-        "US": { name: "United States",  text: "Colorado for altitude sickness and hiking, New York for the MET, Hawaii where I got way too close to active lava (not my fault), and Washington for stunning wilderness and chaotic cities." }
-    };
-
-    /* Ink particle canvas */
-    const canvas = document.getElementById('ink');
-    const ctx = canvas.getContext('2d');
-    const hero = document.getElementById('hero');
-
-    function resize() {
-        canvas.width  = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const pts = Array.from({ length: 60 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.6 + 0.3,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: -(Math.random() * 0.35 + 0.07),
-        a: Math.random() * 0.4 + 0.08
-    }));
-
-    (function tick() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pts.forEach(p => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(100,255,218,${p.a})`;
-            ctx.fill();
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.y < -4) { p.y = canvas.height + 4; p.x = Math.random() * canvas.width; }
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-        });
-        requestAnimationFrame(tick);
-    })();
-</script>
-
-<!-- amCharts world map -->
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-<script>
-am5.ready(function() {
-    var root = am5.Root.new("mapdiv");
-    root.setThemes([ am5themes_Animated.new(root) ]);
-
-    var chart = root.container.children.push(
-        am5map.MapChart.new(root, {
-            panX: "translateX",
-            panY: "translateY",
-            wheelX: "zoom",
-            wheelY: "zoom",
-            projection: am5map.geoNaturalEarth1(),
-            maxZoomLevel: 16,
-            minZoomLevel: 1
-        })
-    );
-
-    /* Background */
-    chart.chartContainer.set("background", am5.Rectangle.new(root, {
-        fill: am5.color(0x020c1b),
-        fillOpacity: 1
-    }));
-
-    var visitedIds = Object.keys(travelDesc);
-    var ACCENT = am5.color(0x64ffda);
-    var BASE   = am5.color(0x112240);
-    var BORDER = am5.color(0x0a192f);
-
-    /* Tooltip */
-    var tooltip = am5.Tooltip.new(root, {
-        getFillFromSprite: false,
-        background: am5.RoundedRectangle.new(root, {
-            fill: am5.color(0x0a192f),
-            stroke: am5.color(0x64ffda),
-            strokeWidth: 1,
-            strokeOpacity: 0.4
-        })
-    });
-    tooltip.label.setAll({ fill: am5.color(0xccd6f6), fontSize: 13 });
-
-    var polygonSeries = chart.series.push(
-        am5map.MapPolygonSeries.new(root, {
-            geoJSON: am5geodata_worldLow,
-            exclude: ["AQ"],
-            tooltip: tooltip
-        })
-    );
-
-    polygonSeries.mapPolygons.template.setAll({
-        fill: BASE,
-        stroke: BORDER,
-        strokeWidth: 0.5,
-        interactive: true,
-        tooltipText: "{name}"
-    });
-
-    /* Hover state */
-    polygonSeries.mapPolygons.template.states.create("hover", {
-        fillOpacity: 0.85
-    });
-
-    /* Single fill adapter — visited = teal, others = navy */
-    polygonSeries.mapPolygons.template.adapters.add("fill", function(fill, target) {
-        var id = target.dataItem && target.dataItem.get("id");
-        return visitedIds.includes(id) ? ACCENT : BASE;
-    });
-
-    polygonSeries.mapPolygons.template.adapters.add("cursorOverStyle", function(_, target) {
-        var id = target.dataItem && target.dataItem.get("id");
-        return visitedIds.includes(id) ? "pointer" : "default";
-    });
-
-    /* Hover or click to show description */
-    function showCountry(id) {
-        var box = document.getElementById("tdesc");
-        if (id && travelDesc[id]) {
-            box.innerHTML = "<strong style='color:var(--white)'>" + travelDesc[id].name + "</strong> — " + travelDesc[id].text;
-        }
-    }
-    polygonSeries.mapPolygons.template.events.on("pointerover", function(ev) {
-        var id = ev.target.dataItem && ev.target.dataItem.get("id");
-        if (id && travelDesc[id]) showCountry(id);
-    });
-    polygonSeries.mapPolygons.template.events.on("click", function(ev) {
-        var id = ev.target.dataItem && ev.target.dataItem.get("id");
-        if (id && travelDesc[id]) showCountry(id);
-    });
-
-    chart.appear(1000, 100);
-});
 </script>
 
 </body>
